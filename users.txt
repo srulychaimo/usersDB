@@ -1,0 +1,16 @@
+id: 8ce5f292-96f7-4032-a9a3-3102e95cea71 | firstName: Leanne  | lastName: Graham | username: Bret | age: 16 | emails: ["Sincere@april.biz", "bert@leanne.com"] | address: {"state": "usa", "city": "Gwenborough", "street": "Kulas Light", "zipcode": 929983874} | phone: 17707368031 | website: hildegard.org | hobbies: ["3D printing", "Beatboxing", "Bowling"] | 
+ ---------- 
+id: 18ce2a00-1460-44cc-8d54-758f5ffe19b6 | firstName: Ervin  | lastName: Howell | username: Antonette | age: 19 | emails: ["Shanna@melissa.tv"] | address: {"state": "usa", "city": "Wisokyburgh", "street": "Victor Plains", "zipcode": 905667771} | phone: 0106926593 | website: anastasia.net | hobbies: ["Gardening", "Hardware", "Rapping"] | 
+ ---------- 
+id: c88ad1ce-f43f-462e-9740-e279e065bb72 | firstName: Clementine  | lastName: Bauch | username: Samantha | age: 26 | emails: ["Nathan@yesenia.net", "enathen@gmail.com"] | address: {"state": "usa", "city": "McKenziehaven", "street": "Douglas Extension", "zipcode": 595904157} | phone: 14631234447 | website: ramiro.info | hobbies: ["Hacking", "coding", "football"] | 
+ ---------- 
+id: 5da794a3-8c85-4f82-945a-a1d19b6c91e6 | firstName: Patricia  | lastName: Lebsack | username: Karianne | age: 22 | emails: ["Julianne.OConner@kory.org"] | address: {"state": "usa", "city": "South Elvis", "street": "Hoeger Mall", "zipcode": 595904157} | phone: 4931709623 | website: kale.biz | hobbies: ["Car spotting", "Chess"] | 
+ ---------- 
+id: 87dd40a7-5b5c-43cb-b8e9-e35422dc351b | firstName: Chelsey  | lastName: Dietrich | username: Kamren | age: 41 | emails: ["Lucio_Hettinger@annie.ca", "kamren@dev.com"] | address: {"state": "usa", "city": "Roscoeview", "street": "Skiles Walks", "zipcode": 33263} | phone: 2569541289 | website: demarco.info | hobbies: ["Judo", "Ice skating", "Kung fu"] | 
+ ---------- 
+id: ca43b983-b378-4d7d-a3ae-bd0b6c9d988a | firstName: Dennis  | lastName: Schulist | username: Leopoldo_Corkery | age: 31 | emails: ["Karley_Dach@jasper.info"] | address: {"state": "usa", "city": "South Christy", "street": "Norberto Crossing", "zipcode": "23505-1337" } | phone: 14779358478 | website: ola.org | hobbies: ["Music", "Video game developing", "Zumba"] | 
+ ---------- 
+id: 4d45bcaf-02e1-4894-8344-3fe026c781b2 | firstName: Kurtis  | lastName: Weissnat | username: Elwyn.Skiles | age: 33 | emails: ["Telly.Hoeger@billy.biz"] | address: {"state": "usa", "city": "Howemouth", "street": "Rex Trail", "zipcode": "58804-1099" } | phone: 2100676132 | website: 2100676132 | hobbies: ["Giving advice", "Pyrography", "Robot combat"] | 
+ ---------- 
+id: 8d997803-36af-416d-ab78-42adffc8d57a | firstName: Nicholas  | lastName: Runolfsdottir  | username: Maxime_Nienow | age: 24 | emails: ["Sherwood@rosamond.me"] | address: {"state": "usa", "city": "Aliyaview", "street": "Ellsworth Summit", "zipcode": "58804-1099" } | phone: 5864936943 | website: jacynthe.com | hobbies: ["Acroyoga", "Bowling", "Computer programming"] | 
+ ---------- 
