@@ -1,9 +1,9 @@
 import colors from "colors";
 
-export const isTypeNumber = (value) => {
+export const isTypeNumber = (value: string) => {
   try {
-    if (isNaN(value)) {
-      return console.error("The answer must be of type 'number'".red);
+    if (isNaN(Number(value))) {
+      return console.error(colors.red("The answer must be of type 'number'"));
     }
 
     return value;
@@ -12,17 +12,17 @@ export const isTypeNumber = (value) => {
   }
 };
 
-export const isTypeObject = (value, keys) => {
+export const isTypeObject = (value: string, keys: string[] | null) => {
   try {
     const isObj = JSON.parse(value);
-    const isArr = Array.isArray(isObj);
+    const isArr: boolean = Array.isArray(isObj);
 
     if (typeof isObj !== "object" || isArr) {
       return console.error(`The answer must be of type 'object'`.red);
     }
 
     if (keys && Array.isArray(keys)) {
-      let errorKeys = [];
+      let errorKeys: string[] = [];
       for (const key of keys) {
         if (!(key in isObj)) {
           errorKeys.push(key);
@@ -46,7 +46,7 @@ export const isTypeObject = (value, keys) => {
   }
 };
 
-export const isTypeArray = (value) => {
+export const isTypeArray = (value: string) => {
   try {
     const isArr = Array.isArray(JSON.parse(value));
 

@@ -1,4 +1,11 @@
-export const questions = [
+interface Question {
+  question: string;
+  type: string;
+  key: string;
+  keys?: string[];
+}
+
+export const questions: Question[] = [
   {
     question: "What is your first name?",
     type: "string",

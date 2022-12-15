@@ -6,33 +6,36 @@ import { stdin as input, stdout as output } from "node:process";
 import { questions } from "./data.js";
 import { isTypeArray, isTypeNumber, isTypeObject } from "./typeValidations.js";
 
+interface Answer {
+  key: string;
+  answer: string;
+}
+
 const addUserWithArr = async () => {
   try {
     const fd = await open("./users.txt", "a+");
 
     const rl = readline.createInterface({ input, output, terminal: false });
 
-    const answers = [];
-    const id = uuidv4();
+    const answers: Answer[] = [];
+    const id: string = uuidv4();
 
     for (const query of questions) {
       let answer = await rl
-        .question(`${query.question} `.green)
+        .question(colors.green(`${query.question} `))
         .then((data) =>
-          validateType(query.type, data, query.keys ? query.keys : "")
+          validateType(query.type, data, query.keys ? query.keys : null)
         );
 
       while (!answer) {
         answer = await rl
           .question(`${query.question} `.green)
           .then((data) =>
-            validateType(query.type, data, query.keys ? query.keys : "")
+            validateType(query.type, data, query.keys ? query.keys : null)
           );
       }
 
-      if (answer) {
-        answers.push({ key: query.key, answer });
-      }
+      answers.push({ key: query.key, answer });
     }
 
     await fd.appendFile(`id: ${id} | `);
@@ -42,7 +45,7 @@ const addUserWithArr = async () => {
 
     await fd
       .appendFile(`\n ---------- \n`)
-      .then(
+      .then(() =>
         console.log(`User with id: ${id} was added successfully!!!`.bgGreen)
       );
 
@@ -57,11 +60,11 @@ const searchUserById = async () => {
   try {
     const rl = readline.createInterface({ input, output, terminal: false });
     const fd = await open("./users.txt", "a+");
-    const searchId = await rl.question(
+    const searchId: string = await rl.question(
       "Whats the user id of the user your looking for? ".yellow
     );
 
-    let userInfo = "";
+    let userInfo: string[] = [];
 
     for await (const line of fd.readLines()) {
       if (line.includes(`id: ${searchId}`)) {
@@ -84,7 +87,7 @@ const searchUserById = async () => {
   }
 };
 
-const validateType = (type, value, keys) => {
+const validateType = (type: string, value: string, keys: string[] | null) => {
   switch (type) {
     case "string":
       return value;
