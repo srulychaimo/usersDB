@@ -1,10 +1,10 @@
-import * as readline from "node:readline/promises";
-import { stdin as input, stdout as output } from "node:process";
-import { open } from "node:fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import colors from "colors";
+import * as readline from "node:readline/promises";
+import { open } from "node:fs/promises";
+import { stdin as input, stdout as output } from "node:process";
 import { questions } from "./data.js";
-import { isTypeArray, isTypeNumber, isTypeObject } from "./typeValidatins.js";
+import { isTypeArray, isTypeNumber, isTypeObject } from "./typeValidations.js";
 
 const addUserWithArr = async () => {
   try {
