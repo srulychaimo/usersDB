@@ -4,50 +4,64 @@ import * as readline from "node:readline/promises";
 import { open } from "node:fs/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { questions } from "./data.js";
-import { isTypeArray, isTypeNumber, isTypeObject } from "./typeValidations.js";
-
-interface Answer {
-  key: string;
-  answer: string;
-}
+import {
+  isTypeArray,
+  isTypeNumber,
+  isTypeObject,
+  checkLength,
+} from "./typeValidations.js";
+import { addIndex } from "./utils.js";
 
 const addUserWithArr = async () => {
   try {
-    const fd = await open("./users.txt", "a+");
+    const fd = await open("./users2.txt", "a+");
 
     const rl = readline.createInterface({ input, output, terminal: false });
 
-    const answers: Answer[] = [];
+    const answers: string[] = [];
     const id: string = uuidv4();
 
     for (const query of questions) {
       let answer = await rl
         .question(colors.green(`${query.question} `))
         .then((data) =>
-          validateType(query.type, data, query.keys ? query.keys : null)
+          validateType(
+            query.type,
+            data,
+            query.length,
+            query.keys ? query.keys : null
+          )
         );
 
       while (!answer) {
         answer = await rl
           .question(`${query.question} `.green)
           .then((data) =>
-            validateType(query.type, data, query.keys ? query.keys : null)
+            validateType(
+              query.type,
+              data,
+              query.length,
+              query.keys ? query.keys : null
+            )
           );
       }
 
-      answers.push({ key: query.key, answer });
+      answers.push(answer);
     }
 
-    await fd.appendFile(`id: ${id} | `);
+    const writeStream = fd.createWriteStream();
+
+    writeStream.write(`${id}|`);
+
     for (const answer of answers) {
-      await fd.appendFile(`${answer.key}: ${answer.answer} | `);
+      writeStream.write(`${answer}|`);
     }
 
-    await fd
-      .appendFile(`\n ---------- \n`)
-      .then(() =>
-        console.log(`User with id: ${id} was added successfully!!!`.bgGreen)
-      );
+    writeStream.write(`\n`);
+
+    await addIndex(id);
+
+    console.log(`User with id: ${id} was added successfully!!!`.bgGreen);
 
     await runProgram();
     rl.close();
@@ -58,48 +72,58 @@ const addUserWithArr = async () => {
 
 const searchUserById = async () => {
   try {
+    const dataFd = await open("./users2.txt", "r");
+    const idIndexFd = await open("./idIndex.txt", "a+");
+
     const rl = readline.createInterface({ input, output, terminal: false });
-    const fd = await open("./users.txt", "a+");
     const searchId: string = await rl.question(
       "Whats the user id of the user your looking for? ".yellow
     );
 
-    let userInfo: string[] = [];
+    let index: string[] | string = [];
 
-    for await (const line of fd.readLines()) {
-      if (line.includes(`id: ${searchId}`)) {
-        userInfo = line.split("|");
-        for (const info of userInfo) {
-          console.log(info.trimStart().bgGreen);
-        }
+    for await (const line of idIndexFd.readLines()) {
+      if (line.includes(searchId)) {
+        index = line.split(":");
       }
     }
 
-    if (!userInfo) {
+    const buf = Buffer.alloc(211);
+    await dataFd.read(buf, 0, 211, Number(index[1]) * 211);
+
+    console.log(buf.toString("utf-8"));
+
+    if (!index.length) {
       console.error(
         `cannot find a user with the id: ${searchId}, please try again!`.red
       );
     }
 
     runProgram();
+    rl.close();
   } catch (err) {
     console.error(err);
   }
 };
 
-const validateType = (type: string, value: string, keys: string[] | null) => {
+const validateType = (
+  type: string,
+  value: string,
+  length: number,
+  keys: string[] | null
+) => {
   switch (type) {
     case "string":
-      return value;
+      return checkLength(value, length);
 
     case "number":
-      return isTypeNumber(value);
+      return isTypeNumber(value, length);
 
     case "array":
-      return isTypeArray(value);
+      return isTypeArray(value, length);
 
     case "object":
-      return isTypeObject(value, keys);
+      return isTypeObject(value, length, keys);
 
     default:
       break;
@@ -123,6 +147,7 @@ const runProgram = async () => {
   console.error("Must choose or 'add' or 'search', please try again!".red);
 
   runProgram();
+  rl.close();
 };
 
 runProgram();

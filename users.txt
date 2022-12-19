@@ -14,9 +14,8 @@ id: 4d45bcaf-02e1-4894-8344-3fe026c781b2 | firstName: Kurtis  | lastName: Weissn
  ---------- 
 id: 8d997803-36af-416d-ab78-42adffc8d57a | firstName: Nicholas  | lastName: Runolfsdottir  | username: Maxime_Nienow | age: 24 | emails: ["Sherwood@rosamond.me"] | address: {"state": "usa", "city": "Aliyaview", "street": "Ellsworth Summit", "zipcode": "58804-1099" } | phone: 5864936943 | website: jacynthe.com | hobbies: ["Acroyoga", "Bowling", "Computer programming"] | 
  ---------- 
-id: 6f9a83a5-0386-40d7-b72d-67c2380d8981 | firstName: yisreal | lastName: chaimowitz | username: yy | age: 20 | emails: ["sruly@gmail.com"] | address: {"state": "israel", "city": "ashdod", "street" :"rava", "zipcode": 1252} | phone: 0526573553 | website: fggf.dev | hobbies: ["swim"] | 
- ---------- 
-id: fdbba5bc-5810-4053-9502-43796d405b6f | firstName: israel | lastName: chaimno | username: tseys | age: 5 | emails: ["fjjf"] | address: {"state": "usa", "city": "newYork", "street": "raca", "zipcode": 5224211} | phone: 4452552 | website: gdhdjjd | hobbies: ["dggd"] | 
- ---------- 
-id: 290f15af-6df9-4973-a07f-8b5cf3a6e81e | firstName: hjfhfhjf | lastName: hfhfhj | username: hffhf | age: 555 | emails: ["kgjgk"] | address: {"state": "ss", "city": "dddddddddddd", "street": "ddddddddd", "zipcode": "dddddddddd"} | phone: 5555555555 | website: rrrrrrrr | hobbies: [""] | 
- ---------- 
+
+
+
+
+{"state": 1, "city": 2, "street": 3, "zipcode": 4}

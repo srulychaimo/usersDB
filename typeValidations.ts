@@ -1,18 +1,25 @@
 import colors from "colors";
 
-export const isTypeNumber = (value: string) => {
+export const isTypeNumber = (value: string, length: number) => {
   try {
     if (isNaN(Number(value))) {
       return console.error(colors.red("The answer must be of type 'number'"));
     }
 
-    return value;
+    const newValue = checkLength(value, length);
+    if (newValue) {
+      return newValue;
+    }
   } catch (err) {
     console.error("The value passed must be a number".yellow, `${err}`.red);
   }
 };
 
-export const isTypeObject = (value: string, keys: string[] | null) => {
+export const isTypeObject = (
+  value: string,
+  length: number,
+  keys: string[] | null
+) => {
   try {
     const isObj = JSON.parse(value);
     const isArr: boolean = Array.isArray(isObj);
@@ -36,8 +43,10 @@ export const isTypeObject = (value: string, keys: string[] | null) => {
         return;
       }
     }
-
-    return value;
+    const newValue = checkLength(value, length);
+    if (newValue) {
+      return newValue;
+    }
   } catch (err) {
     console.error(
       "The value passed must be a valid JSON object".yellow,
@@ -46,7 +55,7 @@ export const isTypeObject = (value: string, keys: string[] | null) => {
   }
 };
 
-export const isTypeArray = (value: string) => {
+export const isTypeArray = (value: string, length: number) => {
   try {
     const isArr = Array.isArray(JSON.parse(value));
 
@@ -55,12 +64,30 @@ export const isTypeArray = (value: string) => {
         "The answer must be of type 'Array' and to array cant be empty! []".red
       );
     }
-
-    return value;
+    const newValue = checkLength(value, length);
+    if (newValue) {
+      return newValue;
+    }
   } catch (err) {
     console.error(
       "The value passed must be a valid 'Array'".yellow,
       `${err}`.red
     );
   }
+};
+
+export const checkLength = (value: string, length: number) => {
+  if (!value) {
+    return;
+  }
+  if (value.length > length) {
+    console.error(`The value cant be more then ${length} CHARACTERS long!`.red);
+    return;
+  }
+
+  if (value.length < length) {
+    value = value.padEnd(length);
+  }
+
+  return value;
 };
