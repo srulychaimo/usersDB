@@ -1,3 +1,0 @@
-268d8a4d-6514-467c-a41d-218b6f07171a|Leanne    |Graham    |Bret      |16|["Sincere@april.biz", "bert@"]|{"state": 1, "city": 2, "street": 3, "zipcode": 4}|1770736803| hildegard.org      |["3D printing"]       |
-ef74b19e-14e2-4cce-a2d7-4cecd8439180|Ervin+    |Graham+   |Bret      |19|["Shanna@melissa.tv"]         |{"state": 1, "city": 2, "street": 3, "zipcode": 4}|0106926593|anastasia.net       |["Gardening", "Hardw"]|
-24445fc2-45d7-495c-867c-63f6d8ae56a8|Clementine|Bauch     |Samantha  |26|["Nathan@yesenia.net"]        |{"state": 1, "city": 2, "street": 3, "zipcode": 4}|1463123444|ramiro.info         |["Hacking", "coding"] |

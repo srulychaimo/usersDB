@@ -4,17 +4,12 @@ import * as readline from "node:readline/promises";
 import { open } from "node:fs/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { questions } from "./data.js";
-import {
-  isTypeArray,
-  isTypeNumber,
-  isTypeObject,
-  checkLength,
-} from "./typeValidations.js";
-import { addIndex } from "./utils.js";
+import { validateType } from "./typeValidations.js";
+import { addIndex, handleAction } from "./utils.js";
 
 const addUserWithArr = async () => {
   try {
-    const fd = await open("./users2.txt", "a+");
+    const fd = await open("./users.txt", "a+");
 
     const rl = readline.createInterface({ input, output, terminal: false });
 
@@ -72,15 +67,15 @@ const addUserWithArr = async () => {
 
 const searchUserById = async () => {
   try {
-    const dataFd = await open("./users2.txt", "r");
-    const idIndexFd = await open("./idIndex.txt", "a+");
+    const idIndexFd = await open("./idIndex.txt", "r");
 
     const rl = readline.createInterface({ input, output, terminal: false });
+
     const searchId: string = await rl.question(
-      "Whats the user id of the user your looking for? ".yellow
+      "Whats the user id of the user your looking for ? ".yellow
     );
 
-    let index: string[] | string = [];
+    let index: string[] = [];
 
     for await (const line of idIndexFd.readLines()) {
       if (line.includes(searchId)) {
@@ -88,10 +83,17 @@ const searchUserById = async () => {
       }
     }
 
-    const buf = Buffer.alloc(211);
-    await dataFd.read(buf, 0, 211, Number(index[1]) * 211);
+    let action: string = await rl.question(
+      "What do you want to get ('all' | 'filed') ? ".yellow
+    );
 
-    console.log(buf.toString("utf-8"));
+    while (!action || (action !== "all" && action !== "filed")) {
+      action = await rl.question(
+        "What do you want to get ('all' | 'filed') ? ".yellow
+      );
+    }
+
+    await handleAction(action, index);
 
     if (!index.length) {
       console.error(
@@ -103,30 +105,6 @@ const searchUserById = async () => {
     rl.close();
   } catch (err) {
     console.error(err);
-  }
-};
-
-const validateType = (
-  type: string,
-  value: string,
-  length: number,
-  keys: string[] | null
-) => {
-  switch (type) {
-    case "string":
-      return checkLength(value, length);
-
-    case "number":
-      return isTypeNumber(value, length);
-
-    case "array":
-      return isTypeArray(value, length);
-
-    case "object":
-      return isTypeObject(value, length, keys);
-
-    default:
-      break;
   }
 };
 

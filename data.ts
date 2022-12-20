@@ -35,7 +35,7 @@ export const questions: Question[] = [
     question:
       "What is your address {state: '', city: '', street: '', zipcode: ''}?",
     type: "object",
-    length: 50,
+    length: 100,
     keys: ["state", "city", "street", "zipcode"],
   },
   {
@@ -52,6 +52,6 @@ export const questions: Question[] = [
   {
     question: "What are your hobbies?",
     type: "array",
-    length: 22,
+    length: 41,
   },
 ];

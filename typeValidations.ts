@@ -1,6 +1,6 @@
 import colors from "colors";
 
-export const isTypeNumber = (value: string, length: number) => {
+const isTypeNumber = (value: string, length: number) => {
   try {
     if (isNaN(Number(value))) {
       return console.error(colors.red("The answer must be of type 'number'"));
@@ -15,11 +15,7 @@ export const isTypeNumber = (value: string, length: number) => {
   }
 };
 
-export const isTypeObject = (
-  value: string,
-  length: number,
-  keys: string[] | null
-) => {
+const isTypeObject = (value: string, length: number, keys: string[] | null) => {
   try {
     const isObj = JSON.parse(value);
     const isArr: boolean = Array.isArray(isObj);
@@ -55,7 +51,7 @@ export const isTypeObject = (
   }
 };
 
-export const isTypeArray = (value: string, length: number) => {
+const isTypeArray = (value: string, length: number) => {
   try {
     const isArr = Array.isArray(JSON.parse(value));
 
@@ -76,7 +72,7 @@ export const isTypeArray = (value: string, length: number) => {
   }
 };
 
-export const checkLength = (value: string, length: number) => {
+const checkLength = (value: string, length: number) => {
   if (!value) {
     return;
   }
@@ -90,4 +86,28 @@ export const checkLength = (value: string, length: number) => {
   }
 
   return value;
+};
+
+export const validateType = (
+  type: string,
+  value: string,
+  length: number,
+  keys: string[] | null
+) => {
+  switch (type) {
+    case "string":
+      return checkLength(value, length);
+
+    case "number":
+      return isTypeNumber(value, length);
+
+    case "array":
+      return isTypeArray(value, length);
+
+    case "object":
+      return isTypeObject(value, length, keys);
+
+    default:
+      break;
+  }
 };
