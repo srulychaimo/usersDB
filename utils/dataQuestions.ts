@@ -1,9 +1,4 @@
-interface Question {
-  question: string;
-  type: string;
-  length: number;
-  keys?: string[];
-}
+import { Question } from "../interfaces/question";
 
 export const questions: Question[] = [
   {
